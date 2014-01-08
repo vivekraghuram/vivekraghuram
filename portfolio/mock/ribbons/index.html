@@ -1,0 +1,331 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Working Title</title>
+
+
+<link type="text/css" rel="stylesheet" href="style.css"  />
+<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+        
+<!--<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />-->
+<script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+<noscript><link rel="stylesheet" type="text/css" href="noJS.css" /></noscript> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<!--Query Loader. Add this back in when the site is done.--> 
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.queryloader2.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+ 
+		<script type="text/javascript"> <!--dropdown menu-->
+			
+			function DropDown(el) {
+				this.dd = el;
+				this.placeholder = this.dd.children('span');
+				this.opts = this.dd.find('ul.dropdown > li');
+				this.val = '';
+				this.index = -1;
+				this.initEvents();
+				
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+
+					obj.dd.on('mouseover', function(event){
+						$(this).addClass('active');
+						return false;
+					});
+
+					obj.opts.on('click',function(){						
+						var opt = $(this);
+						obj.val = opt.text();
+						obj.index = opt.index();
+						obj.placeholder.text(obj.val);
+						
+						var link = '#' + opt.text();  //i added this to catch a link issue in chrome. issue seems to have disappeared when click was changed to mouseover
+						var linknospace = link.replace(/\s+/g, '');
+					//	alert(linknospace);
+						window.location.replace(linknospace); // i added until here. probably should looker for a cleaner solution sometime 
+					});
+				},
+				getValue : function() {
+					return this.val;
+				},
+				getIndex : function() {
+					return this.index;
+				}
+			}
+
+			$(function() {
+				
+
+				var dd = new DropDown( $('#dd') );
+
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown-3').removeClass('active');
+				});
+
+			});
+
+		</script>
+        
+        <script type="text/javascript">
+		function menuSwitch1()
+		{
+		document.getElementById("menuSwitch").innerHTML="Our Model";
+			}
+			
+		function menuSwitch2()
+		{
+		document.getElementById("menuSwitch").innerHTML="Home";	
+		}
+		function menuSwitch3()
+		{
+		document.getElementById("menuSwitch").innerHTML="Contact Us";	
+		}
+		
+		$(window).on("load resize", function(){
+			var div = $("#changewidth");
+			var height = div.height();
+			if (height<532){
+				document.getElementById("changewidth").style.width=850+"px";
+				}
+			else{
+				document.getElementById("changewidth").style.width=450+"px";
+				}
+		var width = $(window).width();
+		var tallness = $(window).height();
+		var font = (width+tallness)/3 + 200;
+		document.getElementById("bigtitle").style.fontSize=font+"%";	
+			});
+		
+		</script>
+        
+</head>
+<body>
+
+<a href="#Home">
+<div class="logobox" onclick="menuSwitch2()">
+	<img src="images/slant100.png" width="40" style="margin-left:20px; margin-top:55px; border:none;"/>
+</div>
+</a>
+
+<div class="copyright">&copy; 2013 Working Title Project</div>
+
+<!--Navigation dropdown-->
+<div style="position:fixed; z-index:1; margin-left:110px; margin-top:50px;">
+		<div id="dd" class="wrapper-dropdown-3" tabindex="1">
+			<span id="menuSwitch">Home</span>
+			<ul class="dropdown">
+				<li><a href="#Home">Home</a></li>
+				<li><a href="#TheTeam">The Team</a></li>
+                <li><a href="#OurModel">Our Model</a></li>
+				<li><a href="#Portfolio">Portfolio</a></li>
+                <li><a href="#ContactUs">Contact Us</a></li>
+			</ul>
+		</div>
+</div>
+<!--end nav dropdown-->
+
+<!--content and shit-->
+<div id="Home">
+<div id="TheTeam">
+<div id="OurModel">
+<div id="Portfolio">
+<div id="ContactUs">
+
+	<div id="i1" class="page">
+		<div class="title" id="bigtitle">
+        	The<br/>
+        	Working<br/>
+        	Title Project<br />
+        </div>
+        <div class="social" style="position:absolute; left:-47px; bottom:-10px; z-index:1;">
+			<div class="cell ">
+				<div class="share-wrapper top">
+				  <div class="rc10 share-action icon-share"></div>
+				  <div class="share-container rc10">
+				    <a class="share-btn tl icon-google-plus" href='#'></a>    
+				    <a class="share-btn tr icon-twitter" href='#'></a>    
+				    <a class="share-btn br icon-facebook" href='#'></a>    
+				    <a class="share-btn bl icon-linkedin" href='#'></a>    
+				  </div>
+				</div>
+			</div>        
+        </div>
+        <div id="changewidth" style="position:absolute; top:200px; left:105px; max-height:700px; min-height:400px; width:450px; height:72%;"><!-- hold hella cards-->
+        <div class="card" style="margin-bottom:15px;" onclick="resize()">
+        	<h2>Lorem Solutions</h2>
+            <div style="padding-left:10px;">
+            <p>Lorem Ipsum<br />
+            - We make lorem<br />
+            - Solve lorem problems<br />
+            - Consectetur adipiscing elit</p>
+            </div>
+        	<div style="width:100%; bottom:0px; background-color:rgb(0,204,255); height:12px; position:absolute; margin-left:-5px;"></div>	
+        </div>
+        <div class="card" style="margin-bottom:15px;">
+        	<h2>Ipsum Solutions</h2>
+        	<div style="padding-left:10px;">
+            <p>- Is your ip some?<br />
+            - I hope it is!<br />
+            - We can help with that<br />
+            - Ipsum solved</p>
+            </div>
+            <div style="width:100%; bottom:0px; background-color:rgb(255,102,0); height:12px; position:absolute; margin-left:-5px;"></div>	
+        </div>
+        <div class="card" style="margin-bottom:15px;">
+        	<h2>Dolor Solutions</h2>
+            <div style="padding-left:10px;">
+            <p>- Pains<br />
+            - That is what dolor means<br />
+            - In spanish<br />
+            - Idk about lorem ipsum</p>
+            </div>
+        	<div style="width:100%; bottom:0px; background-color:rgb(85,212,0); height:12px; position:absolute; margin-left:-5px;"></div>	
+        </div>
+        <a href="#OurModel">
+        <div class="pricingbutton" onclick="menuSwitch1()">
+        	<h2 style="font-size:20px; margin-top:2px;">Pricing Model</h2>
+            <img src="images/arrow.png" style="position:absolute; right:10px; top:6px; border:none;" height="24"/>
+        </div>
+        </a>
+        </div><!--end hold hella cards-->
+	</div><!--end i1-->
+    
+    <div id="i2" class="page">
+    	<div class="teamcontainer" style="left:28%;">
+        	<div class="teamimage">
+            	<img src="images/vivek.png" />
+            </div>
+            <div class="teamsub" id="id1match">
+            	<h1 style="color:rgb(85,212,0);">Vivek Raghuram</h1>
+                <h2 style="color:rgb(85,212,0);">CEO</h2> 
+                <p>He is a freshmen at UC Berkeley. He is experienced in marketing, graphic design and web design and development as well as management of a program to teach over 400 students business and marketing.</p>  
+            </div>
+        </div>
+        
+        <div class="teamcontainer" style="left:50%;">
+        	<div class="teamimage" id="di1">
+            	<img src="images/shailee.png" />
+            </div>
+            <div class="teamsub" id="id1match">
+            	<h1 style="color:rgb(255,102,0);">Shailee Samar</h1>
+                <h2 style="color:rgb(255,102,0);">CMO</h2> 
+                <p>She is a Senior at Monta Vista High School. Her experience includes marketing and public relations work not only with campus organizations but also with schools across the district, several local businesses and the Cupertino Chamber of Commerce.</p> 
+            </div>
+        </div>
+        
+        <div class="teamcontainer" style="left:72%;">
+        	<div class="teamimage" id="di1">
+            	<img src="images/ani.png" />
+            </div>
+            <div class="teamsub" id="id1match">
+            	<h1 style="color:rgb(0,204,255);">Ani Kunaparaju</h1>
+                <h2 style="color:rgb(0,204,255);">CTO</h2> 
+                <p>He is a Junior at Monta Vista High School. His experience includes the development and management of several websites utilizing a variety of web technologies like Lorem Ipsum generators</p>
+            </div>
+        </div>
+  	</div><!--end i2-->
+    
+    <div id="i3" class="page">
+    	<div style="position:absolute; top:20%; left:50%; margin-left:-515px;"><!--start containment capsule of the model stuff-->
+    		<div class="modelgoals">
+    			<h1>Our Goals</h1>
+            	<div style="padding-left:8px;">
+            		<h2> We had a few goals when starting this project:</h2>
+            		<!--<h2 style="font-size:12px;">(Ranked in order)</h2>-->
+            		<p style="font-size:21px; line-height:185%;">
+            		- Help the Community<br />
+            		- Employ Locals<br />
+            		- Improve Local Business<br />
+            		- Utilize Talents<br />
+            		- Gain Experience<br />
+            		- Learn<br />
+            		- Network<br />
+            		<font style="color:rgb(85,212,0); font-weight:600;">- Spread Lorem</font>
+            		</p>
+            	</div>
+        	</div>
+        	<div style="margin-left:15px; float:left;">
+        		<div class="modelexp" style="margin-top:0px; padding-top:20px;">
+            		<p style="font-size:21px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras bibendum varius augue. Mauris metus neque, rutrum eu mollis nec, consequat sit amet sem. Aliquam lobortis est a lacus convallis, non dictum purus faucibus. Sed in feugiat <font style="color:rgb(255,102,0);">metus</font>.</p>
+        		</div>
+            	<div class="modelexp" style="margin-top:20px;"><br /><br />
+            		<p style="font-size:21px;"><font style="color:rgb(255,102,0);">Aenean</font> fermentum, velit sed tempus facilisis, ante justo molestie urna, ac imperdiet metus risus a quam. Nam vitae velit pellentesque, pellentesque est non, lacinia diam. Sed sed pellentesque est, non bibendum mi.</p>
+        		</div>
+        	</div>
+        	<div class="modelgoals" style="margin-left:15px;">
+            	<h1>We earn it by <font style="color:rgb(255,102,0);">loreming</font> you</h1>
+                <br />
+            	<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:rgb(0,204,255); font-weight:600;">Lorem Ipsum = Price</font></h2><br />
+            	<h2>Only pay as much as you use the generator. We can always suggest a price but in the end it is your decision.</h2>
+                <br />
+                <div style="height:1px; background-color:#999; width:290px; position:absolute; bottom:100px; margin-left:-3px;">&nbsp;</div>
+                <a href="#ContactUs" onclick="menuSwitch3()">
+                <div class="button">
+                	<h2>So with no risk, why not give us a shot?</h2>
+                    <img src="images/arrow.png" style="position:absolute; right:10px; top:60px; border:none;" height="24"/>
+                </div>
+                </a>
+    		</div>
+        </div><!--end containment capsule of the model stuff-->
+    </div><!--end i3-->
+	
+    <div id="i4" class="page">
+   		<div class="centered">&nbsp;</div>
+		<div class="centeredtext">Our Portfolio!</div>
+	</div><!--end i4-->
+    
+    <div id="i5" class="page">
+		<div class="centered">&nbsp;</div>
+		<div class="centeredtext">Call Me Maybe?</div>
+	</div><!--end i5-->
+
+
+</div><!--end ContactUs-->
+</div><!--end Portfolio-->
+</div><!--end OurModel-->
+</div><!--end TheTeam-->
+</div><!--end Home-->
+<!--end of content and shit-->
+
+</body>
+<!--add this back in later when you feel ready to double the work load...
+<script type="text/javascript">
+	var currentTime = new Date().getHours();
+	if (7 <= currentTime && currentTime < 20) {
+    	if (document.body) {
+    	    document.body.background = "images/retina_wood.png";
+			document.getElementById("bigtitle").className = "titleday"
+    	}
+	}
+	else {
+    	if (document.body) {
+        	document.body.background = "images/dark_wood.png";
+			document.getElementById("bigtitle").className = "titlenight"
+    	}
+	}
+</script>
+
+<!--credits
+
+Thank you to subtlepatterns.com for the backgrounds
+
+Thank you to Hugo Giraudel from codrops for the menu tutorial 
+
+Thank you to madeingermany for the slideshow tutorial 
+
+Thank you to Font Awesome - http://fortawesome.github.com/Font-Awesome
+
+Thanks to the awesome people on the stackoverflow forums
+
+-->
+</html>
