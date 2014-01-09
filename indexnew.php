@@ -220,17 +220,34 @@ LOG;
 ?>
 
 <body>
+    <div class="navigation">
+        <ul>
+            <li>Education & Skills</li>
+            <li>Experience</li>
+            <li>Portfolio</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </div>
+    <div class="container">
 <!-- ***************************INTRO CONTENT******************************** -->
 
 	<div class="wrapper highest">
         <div class="row">
             <div class="twelve columns centered" style="text-align:center;">
-                <h1 class="xxlarge hoverblue" >Welcome</h1>
+                <br><br><br><br><br><br><br>
                 <div class="row">
-                    <div class="circle image four columns centered"><img src="img/vivek.jpg"></div>
+                    <div class="two columns push_four">
+                        <img src="img/logo550.png">
+                    </div>
+                    <div class="six columns" style="text-align:left;">
+                        <h5><a href="mailto:me@vivekraghuram.com" class="hovergreen">me@vivekraghuram.com</a></h5>
+                        <h5><a href="http://www.linkedin.com/profile/view?id=130087505&trk=nav_responsive_tab_profile" class="hovergreen">linkedin</a></h5>
+                        <h5><a href="https://github.com/vivekraghuram" class="hovergreen">Github</a></h5>
+                    </div>
                 </div>
-                <h3 class="hovergreen" >You've reached the personal website of Vivek Raghuram</h3>
-                <h1 class="xlarge skiplink" ><a href="#" gumby-goto="#lg" gumby-offset="-60"><i class="icon-down-open-mini hovergreen"></i></a></h1>
+                <br><br><br><br><br><br><br>
+                <h1 class="xlarge skiplink" ><a href="#" gumby-goto="#lg" gumby-offset="-60"><i class="icon-down-open-mini hovergreen arrow"></i></a></h1>
             </div>
         </div>
     </div>
@@ -241,9 +258,9 @@ LOG;
 		<div class="row">
 			<a class="toggle" gumby-trigger="#nav1 > .row > ul" href="#"><i class="icon-menu"></i></a>
 			<ul class="twelve columns">
-				<li class="skiplink"><a href="#" gumby-goto="#lg" gumby-offset="-60">Logos</a></li>
-				<li class="skiplink"><a href="#" gumby-goto="#bc" gumby-offset="-60">Business Cards</a></li>
-				<li class="skiplink"><a href="#" gumby-goto="#wb" gumby-offset="-60">Websites</a></li>
+				<li class="skiplink"><a href="#" gumby-goto="#lg" gumby-offset="-60">Skills</a></li>
+				<li class="skiplink"><a href="#" gumby-goto="#bc" gumby-offset="-60">College</a></li>
+				<li class="skiplink"><a href="#" gumby-goto="#wb" gumby-offset="-60">High School</a></li>
                 <li class="skiplink"><a href="#" gumby-goto="#ct" gumby-offset="-60">Contact</a></li>
 			</ul>
 		</div>
@@ -380,7 +397,7 @@ LOG;
     </div>
 
 
-
+</div><!-- End Container -->
 
 
 
