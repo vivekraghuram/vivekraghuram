@@ -36,6 +36,12 @@ hr {
 .wrapper{
 	padding: 35px 10px 15px 10px;
 	background-color:#fff;
+	h1, h2, h3, h4, h5, p{color:$black}
+}
+
+.slidewrapper{
+	padding: 35px 10px 15px 10px;
+	background-color:#fff;
 	&.dark{background-color:#000;}
 	&.rcolor{background-color:rgb(246,156,155)}
 	&.gcolor{background-color:rgb(182,216,132)}

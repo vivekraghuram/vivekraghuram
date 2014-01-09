@@ -1,7 +1,7 @@
 function navigate(navid) {
 
 //Close everything
-	var wrappers = $('.wrapper');
+	var wrappers = $('.slidewrapper');
 	$(wrappers).removeClass('open');
 
 //Remove nav color
