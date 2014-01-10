@@ -1900,7 +1900,7 @@ hr { color: #fff !important; background-color: #fff !important; border-color: #f
 .slidewrapper { padding: 35px 10px 15px 10px; background-color: #fff; position: fixed; width: 100%; height: 100%; top: 0px; left: -100%; overflow-y: auto; overflow-x: none; z-index: 100; -webkit-transition-duration: 0.3s; -moz-transition-duration: 0.3s; -o-transition-duration: 0.3s; transition-duration: 0.3s; }
 .slidewrapper.dark { background-color: #000; }
 .slidewrapper.rcolor { background-color: #f69c9b; }
-.slidewrapper.gcolor { background-color: #b6d884; }
+.slidewrapper.gcolor { background-color: #A4C277; }
 .slidewrapper.bcolor { background-color: #6bbce9; }
 .slidewrapper.ycolor { background-color: #ffed81; }
 .slidewrapper.wcolor { background-color: #f0f0f0; }
