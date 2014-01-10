@@ -67,7 +67,6 @@ hr {
 }
 
 .navigation{
-	text-align: center;
 	position:fixed;
 	bottom: 0px;
 	margin:0px;
@@ -78,13 +77,19 @@ hr {
 	color:$black;
 	z-index: 200;
 	@include box-shadow(0 0 3px #999);
-	ul{
-		display: inline-block;
-		li{
-			height: 100%;
-			font-size: $med;
-			padding: 7px 15px 7px 15px;
-			float: left;
+	.table{
+		display: table;
+		margin: 0 auto;
+		ul{
+			list-style: none;
+			display: inline;
+			li{
+				display: inline;
+				height: 40px;
+				line-height: 40px;
+				font-size: $med;
+				padding: 9px 15px 9px 15px;
+			}
 		}
 	}
 }
@@ -110,4 +115,14 @@ hr {
 #comic img{
 	height: auto !important;
 	background-color:#fff;
+}
+
+@include respond(all-phones){
+	.centify{
+		text-align: center !important;
+	}
+
+	.navigation{
+		height:80px;
+	}
 }

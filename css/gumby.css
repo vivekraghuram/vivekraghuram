@@ -1910,9 +1910,10 @@ hr { color: #fff !important; background-color: #fff !important; border-color: #f
 
 .open { left: 0px !important; }
 
-.navigation { text-align: center; position: fixed; bottom: 0px; margin: 0px; height: 40px; text-align: center; width: 100%; background-color: white; color: black; z-index: 200; -webkit-box-shadow: 0 0 3px #999999; -moz-box-shadow: 0 0 3px #999999; box-shadow: 0 0 3px #999999; }
-.navigation ul { display: inline-block; }
-.navigation ul li { height: 100%; font-size: 18px; padding: 7px 15px 7px 15px; float: left; }
+.navigation { position: fixed; bottom: 0px; margin: 0px; height: 40px; text-align: center; width: 100%; background-color: white; color: black; z-index: 200; -webkit-box-shadow: 0 0 3px #999999; -moz-box-shadow: 0 0 3px #999999; box-shadow: 0 0 3px #999999; }
+.navigation .table { display: table; margin: 0 auto; }
+.navigation .table ul { list-style: none; display: inline; }
+.navigation .table ul li { display: inline; height: 40px; line-height: 40px; font-size: 18px; padding: 9px 15px 9px 15px; }
 
 .navlink { color: black; cursor: pointer; }
 .navlink:hover { color: #00aad4; }
@@ -1923,3 +1924,6 @@ hr { color: #fff !important; background-color: #fff !important; border-color: #f
 #loadcontainer img { height: 120px; }
 
 #comic img { height: auto !important; background-color: #fff; }
+
+@media only screen and (max-width: 767px) { .centify { text-align: center !important; }
+  .navigation { height: 80px; } }
