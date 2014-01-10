@@ -1,7 +1,7 @@
 .centalign{text-align: center;}
 .rotate{@include rotate(-90deg);}
 /*.onwhite{color:#000;}*/
-.projectbox{height:250px;}
+.projectbox{max-height:250px;}
 
 .hoverblue{
 	color:#000;
@@ -97,4 +97,17 @@ hr {
 		color:$white;
 		background-color:rgb(0,170,212);
 	}
+}
+
+#loadcontainer{
+	@include transition-duration(.3s);
+}
+
+#loadcontainer img{
+	height:120px;
+}
+
+#comic img{
+	height: auto !important;
+	background-color:#fff;
 }

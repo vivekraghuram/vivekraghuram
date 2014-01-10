@@ -17,3 +17,10 @@ function navigate(navid) {
 	$(selectnav).addClass('chosen');
 
 }
+
+$('.projectbox a').bind('click', function(e) {
+  var url = $(this).attr('href');
+  $('#loadcontainer').load(url+' #target'); // load the html response into a DOM element
+  e.preventDefault(); // stop the browser from following the link
+});
+

@@ -1877,7 +1877,7 @@ table.rounded thead th, table.rounded thead td, table.rounded caption + tbody tr
 .rotate { -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); transform: rotate(-90deg); }
 
 /*.onwhite{color:#000;}*/
-.projectbox { height: 250px; }
+.projectbox { max-height: 250px; }
 
 .hoverblue { color: #000; -webkit-transition-duration: 0.6s; -moz-transition-duration: 0.6s; -o-transition-duration: 0.6s; transition-duration: 0.6s; }
 .hoverblue:hover { color: #00aad4; }
@@ -1917,3 +1917,9 @@ hr { color: #fff !important; background-color: #fff !important; border-color: #f
 .navlink { color: black; cursor: pointer; }
 .navlink:hover { color: #00aad4; }
 .navlink.chosen { color: white; background-color: #00aad4; }
+
+#loadcontainer { -webkit-transition-duration: 0.3s; -moz-transition-duration: 0.3s; -o-transition-duration: 0.3s; transition-duration: 0.3s; }
+
+#loadcontainer img { height: 120px; }
+
+#comic img { height: auto !important; background-color: #fff; }
