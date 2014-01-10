@@ -1,7 +1,7 @@
 function navigate(navid) {
 
 //Close everything
-	var wrappers = $('.wrapper');
+	var wrappers = $('.slidewrapper');
 	$(wrappers).removeClass('open');
 
 //Remove nav color
@@ -16,26 +16,11 @@ function navigate(navid) {
 	var selectnav = $('#'+navid);
 	$(selectnav).addClass('chosen');
 
-/*
-
-	var items = $('.helppanel, .helppanelbutton, .xbox');
-	var navlink = $('.navlink');
-	var current = navlink.id;
-	var xbox = $('.xbox')
-
-	var open = function() {
-							$(items).removeClass('close').addClass('open');
-						}
-	var close = function() { 
-							$(items).removeClass('open').addClass('close');
-						}
-
-	hp.click(function(){
-		if (hp.hasClass('open')) {$(close)}
-		else {$(open)}
-	});
-	xbox.click(function(){
-		if (hp.hasClass('open')) {$(close)};
-	});*/
-
 }
+
+$('.projectbox a').bind('click', function(e) {
+  var url = $(this).attr('href');
+  $('#loadcontainer').load(url+' #target'); // load the html response into a DOM element
+  e.preventDefault(); // stop the browser from following the link
+});
+
