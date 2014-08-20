@@ -22,6 +22,8 @@ $('.projectbox a').bind('click', function(e) {
   var url = $(this).attr('data-href');
   $('#loadcontainer').load(url+' #target'); // load the html response into a DOM element
   e.preventDefault(); // stop the browser from following the link
-  $(".slidewrapper").scrollTop($("#scrollhere").position().top);
+  setTimeout(function(){
+  	$(".slidewrapper").scrollTop($("#scrollhere").position().top);
+  }, 300);
 });
 

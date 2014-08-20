@@ -3,6 +3,10 @@
 /*.onwhite{color:#000;}*/
 .projectbox{max-height:250px;}
 
+.black{
+	color:$black;
+}
+
 .hoverblue{
 	color:#000;
 	@include transition-duration(0.6s);
@@ -40,7 +44,7 @@ hr {
 }
 
 .slidewrapper{
-	padding: 35px 10px 15px 10px;
+	padding: 35px 10px 150px 10px;
 	background-color:#fff;
 	&.dark{background-color:#000;}
 	&.rcolor{background-color:rgb(246,156,155)}
@@ -70,13 +74,13 @@ hr {
 	position:fixed;
 	bottom: 0px;
 	margin:0px;
-	height:40px;
+	height:60px;
 	text-align: center;
 	width: 100%;
 	background-color:$white;
 	color:$black;
 	z-index: 200;
-	@include box-shadow(0 0 3px #999);
+	@include box-shadow(0 0 1px #333);
 	.table{
 		display: table;
 		margin: 0 auto;
@@ -85,10 +89,11 @@ hr {
 			display: inline;
 			li{
 				display: inline;
-				height: 40px;
-				line-height: 40px;
-				font-size: $med;
-				padding: 9px 15px 9px 15px;
+				height: 60px;
+				line-height: 60px;
+				font-weight: $font-weight-light;
+				font-size: $med + 2;
+				padding: 18px 20px 18px 20px;
 			}
 		}
 	}
@@ -123,6 +128,6 @@ hr {
 	}
 
 	.navigation{
-		height:80px;
+		height:120px;
 	}
 }
