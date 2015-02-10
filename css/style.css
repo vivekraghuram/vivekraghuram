@@ -1,4 +1,293 @@
-/*
-We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
-However, this blank file is available if you prefer
-*/
+/**************************************
+************* GENERAL *****************
+**************************************/
+
+.text-center { text-align: center; }
+.text-right {text-align: right; }
+.active { left: 0px !important; }
+@media (max-width: 40.063em) {
+  .small-center { text-align:center !important; }
+}
+
+a {
+  color: black;
+  transition-duration: 0.3s;
+}
+
+a:hover {
+  color: rgb(113,200,55);
+}
+
+button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: solid 1px white;
+  color: white;
+  border-radius: 3px;
+  transition-duration: 0.3s;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+p, h1, h2, h3, h4, h5 {
+  font-weight: 300;
+}
+
+.bg-purplelight {background-color: rgba(155, 89, 182,1.0);}
+.bg-purple {background-color: rgba(142, 68, 173,1.0);}
+.bg-redlight { background-color: rgba(231, 76, 60,1.0);}
+.bg-red { background-color: rgba(192, 57, 43,1.0);}
+.bg-turquoiselight { background-color: rgba(26, 188, 156,1.0);}
+.bg-turquoise { background-color: rgba(22, 160, 133,1.0);}
+.bg-greenlight { background-color: rgba(46, 204, 113,1.0);}
+.bg-green { background-color: rgba(39, 174, 96,1.0);}
+.bg-bluelight { background-color: rgba(52, 152, 219,1.0);}
+.bg-blue { background-color: rgba(41, 128, 185,1.0);}
+.bg-yellowlight { background-color: rgba(241, 196, 15,1.0);}
+.bg-yellow { background-color: rgba(243, 156, 18,1.0);}
+.bg-orangelight { background-color: rgba(230, 126, 34,1.0);}
+.bg-orange { background-color: rgba(211, 84, 0,1.0);}
+.bg-bluegreylight { background-color: rgba(52, 73, 94,1.0);}
+.bg-bluegrey { background-color: rgba(44, 62, 80,1.0);}
+.bg-greylight { background-color: rgba(149, 165, 166,1.0);}
+.bg-grey { background-color: rgba(127, 140, 141,1.0);}
+.bg-offwhitelight { background-color: rgba(236, 240, 241,1.0);}
+.bg-offwhite { background-color: rgba(189, 195, 199,1.0);}
+
+.bg-white { background-color: #FFFFFF; }
+.bg-black { background-color: #000000; }
+
+
+/**************************************
+************* NAVBAR *****************
+**************************************/
+
+.navigation {
+  position: fixed;
+  bottom: 0px;
+  margin: 0px;
+  height: 60px;
+  text-align: center;
+  width: 100%;
+  background-color: white;
+  z-index: 200;
+  -webkit-box-shadow: 0 0 1px #333333;
+  -moz-box-shadow: 0 0 1px #333333;
+  box-shadow: 0 0 1px #333333;
+}
+
+@media (max-width: 40.063em) {
+  .navigation { height: 120px; }
+}
+
+.navigation .links {
+  display: table;
+  margin: 0 auto;
+}
+.navigation .links ul {
+  list-style: none;
+  display: inline;
+}
+.navigation .links ul li {
+  display: inline;
+  height: 60px;
+  line-height: 60px;
+  font-weight: 300;
+  font-size: 20px;
+  padding: 18px 20px;
+  cursor: pointer;
+}
+
+.navigation .links ul li:hover {
+  color: #00aad4;
+}
+
+.navigation .links ul li.chosen {
+  color: white;
+  background-color: #00aad4;
+}
+
+
+/**************************************
+************* PORTFOLIO ****************
+**************************************/
+
+.portfolio-block {
+  display:inline-block;
+  position:relative;
+  height: 200px;
+  width: 300px;
+  margin: 10px;
+  text-align:center;
+  font-size:1.35em;
+  background-size:cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.portfolio-block:before {
+  content: '';
+  position: absolute;
+  top: 80%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition-duration: 0.3s;
+}
+
+.portfolio-block:hover::before {
+  top: 100%;
+}
+
+.portfolio-block:hover .tags {
+  bottom: -40px;
+}
+
+.portfolio-block:hover .portfolio-text {
+  top: 0px;
+}
+
+.portfolio-block-invisible {
+  display:inline-block;
+  position:relative;
+  height: 1px;
+  width: 300px;
+  margin: 10px;
+}
+
+.portfolio-text {
+  position:absolute;
+  top:100%;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  transition-duration: 0.3s;
+}
+
+.portfolio-text h4, .portfolio-text h5, .portfolio-text small, .portfolio-text p {
+  color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+.tags {
+  position: absolute;
+  bottom:-10px;
+  right:10px;
+  transition-duration:0.3s;
+}
+
+.tags > li {
+  display:inline-block;
+  text-align:center;
+  color: white;
+  border-radius:0.5em;
+  font-size:0.7em;
+  line-height:1em;
+  padding:2px 3px;
+  margin: 2px;
+}
+
+.gallery {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-align: left;
+  height: 0px;
+  overflow: hidden;
+  transition-duration: 0.3s;
+}
+
+.gallery.expand {
+  height:400px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.gallery img {
+  max-height: 150px;
+  max-width: 300px;
+  margin: 15px;
+}
+
+.white-images img {
+  background-color:white;
+}
+
+/**************************************
+************* SLIDES *****************
+**************************************/
+
+.slide {
+  padding: 35px 10px 150px 10px;
+  position:fixed;
+  width:100%;
+  height: 100%;
+  top:0px;
+  left: -100%;
+  overflow-y: auto;
+  overflow-x:none;
+  z-index: 100;
+  transition-duration: .3s;
+  -webkit-transition-duration: .3s;
+  -moz-transition-duration: .3s;
+  -o-transition-duration: .3s;
+}
+
+hr {
+  color: #fff;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+#contact-slide {
+  height: 100%;
+}
+
+#contact-slide img {
+  max-height: 120px;
+}
+
+#contact-slide .row {
+  position: relative;
+  top: 35%;
+}
+
+@media (max-width: 40.063em) {
+  #contact-slide { text-align:center; }
+}
+
+#eduskills-slide, #eduskills-slide h2, #eduskills-slide h4, #eduskills-slide h5 {
+  color: white;
+}
+
+#eduskills-slide .row {
+  position: relative;
+  top: 15%;
+  margin-bottom: 25px;
+}
+
+#experience-slide, #experience-slide h2, #experience-slide h4, #experience-slide h5 {
+  color: white;
+}
+
+#portfolio-slide {
+  text-align: center;
+}
+
+#about-slide .row:first-of-type {
+  position: relative;
+  top: 15%;
+}
+
+#about-slide p {
+  color: white;
+  margin-top: 25px;
+}
