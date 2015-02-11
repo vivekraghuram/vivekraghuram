@@ -16,8 +16,8 @@ $(document).ready(function() {
       elemHTML += '"><div class="portfolio-text"><h4>' + data[elem].title +'</h4>';
       elemHTML += '<h5><small>' + data[elem].date + '</small></h5>';
       elemHTML += '<p>' + data[elem].description +'</p>';
-      if (data[elem].href) elemHTML += '<a href="' + data[elem].href + '"><button>Visit</button></a>';
-      if (data[elem].code) elemHTML += '<a href="' + data[elem].code + '"><button>Code</button></a>';
+      if (data[elem].href) elemHTML += '<a target="_blank" href="' + data[elem].href + '"><button>Visit</button></a>';
+      if (data[elem].code) elemHTML += '<a target="_blank" href="' + data[elem].code + '"><button>Code</button></a>';
       if (data[elem].gallery) elemHTML += '<button class="gallery-button" data-target="#' + elem + '">Gallery</button>';
       elemHTML += '</div>';
 
