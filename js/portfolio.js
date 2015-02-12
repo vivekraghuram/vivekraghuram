@@ -139,7 +139,7 @@ data = {
     type: 'link',
     title: 'Friends and Family Grants',
     date: 'Sep 2013 - Sep 2014',
-    description: 'Helped develop a crowdfunding website for the Berkeley Public Schools Fund',
+    description: 'Helped develop a crowdfunding website for the Berkeley Public Schools Fund.',
     href: "https://schoolsfund-friendsandfamily.herokuapp.com",
     code: 'https://github.com/calblueprint/bpsf',
     tags: {
@@ -151,6 +151,25 @@ data = {
     bg: {
       color: 'orange',
       image: 'bpsf.png'
+    }
+  },
+  helpingHand: {
+    type: 'link',
+    title: 'Helping Hand',
+    date: 'Aug 2013',
+    description: 'Website built at a hackathon using Meteor.js to connect people to nonprofits.',
+    href: "http://helping-hand.meteor.com",
+    code: 'https://github.com/SamLau95/helping-hand',
+    tags: {
+      tag1: 'Team',
+      tag2: 'Frontend',
+      tag3: 'Design',
+      tag4: 'Website'
+    },
+    bg: {
+      color: 'offwhitelight',
+      image: 'helpinghand.png',
+      backgroundSize: 'contain'
     }
   },
   greenGalaxy: {
@@ -168,21 +187,6 @@ data = {
     bg: {
       color: 'green',
       image: 'greengalaxy.png'
-    }
-  },
-  ppts: {
-    type: 'link',
-    title: 'Mock Business Plan Powerpoints',
-    date: 'Sep 2011 - Dec 2012',
-    description: 'Mock business plan powerpoints made for Cubed and TeenGurus',
-    href: "https://www.dropbox.com/sh/0wplt2j39sxwfmt/AAAwP_IpAVTfNIEcnS3T_3wQa?dl=0",
-    tags: {
-      tag2: 'Design'
-    },
-    bg: {
-      color: 'offwhite',
-      image: 'ppts.png',
-      backgroundSize: 'cover'
     }
   },
   greenGalaxylogos: {
@@ -265,6 +269,21 @@ data = {
     bg: {
       color: 'offwhitelight',
       image: 'econ/1.png',
+      backgroundSize: 'cover'
+    }
+  },
+  ppts: {
+    type: 'link',
+    title: 'Mock Business Plan Powerpoints',
+    date: 'Sep 2011 - Dec 2012',
+    description: 'Mock business plan powerpoints made for Cubed and TeenGurus',
+    href: "https://www.dropbox.com/sh/0wplt2j39sxwfmt/AAAwP_IpAVTfNIEcnS3T_3wQa?dl=0",
+    tags: {
+      tag2: 'Design'
+    },
+    bg: {
+      color: 'offwhite',
+      image: 'ppts.png',
       backgroundSize: 'cover'
     }
   },
