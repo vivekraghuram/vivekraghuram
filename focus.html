@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Focus</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      #quote {
+        position:absolute;
+        bottom:50%;
+        width:100%;
+        text-align:center;
+      }
+
+      #quote h1 {
+        color:white;
+      }
+    </style>
+  </head>
+  <body class="bg-bluegrey">
+    <div id="quote">
+      <h1></h1>
+    </div>
+
+    <script>
+      var first = "Our greatest accomplishments cannot be behind us.";
+      var second = "What hurts more, the pain of hard work or the pain of regret?";
+      var quotes = [first, second];
+      var index = Math.floor(Math.random() * quotes.length);
+      document.querySelector('h1').textContent = quotes[index];
+    </script>
+  </body>
+</html>
