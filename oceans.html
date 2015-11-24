@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Oceans</title>
+    <link rel="stylesheet" href="css/oceans.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <video autoplay loop poster="images/stormy.jpg" class="cover-video">
+        <source src="videos/timelapse.webm" type="video/webm">
+        <source src="videos/timelapse.mp4" type="video/mp4">
+    </video>
+    <div class="cover-video-placeholder">
+      <h1>Oceans</h1>
+    </div>
+
+    <div class="nav">
+      <ul>
+        <a href="#topic1"><li>Plate Tectonics</li></a>
+        <a href="#topic2"><li>Navigation</li></a>
+        <a href="#topic3"><li>Carbon Chemistry</li></a>
+      </ul>
+    </div>
+
+    <div class="section section-one" id="topic1">
+      <div class="content">
+        <h1>Earth Structure & Plate Tectonics</h1>
+        <div class="wide">
+          <p>
+            The earth is composed of several layers of material. From the center outward are
+            the inner core, outer core, lower mantle (Mesosphere), upper mantle (Asthenosphere)
+            and the crust (Lithosphere). The core is mostly composed of iron (85%) while the
+            crust is mostly oxygen (46%) and silicon (28%). The crust floats on top of the mantle.
+          </p>
+          <p>
+            The Continental Drift Theory states that the crust is broken into tectonic plates which
+            move around as they float on the mantle. Their collisions and motion formed the continents
+            and many geographic features like mountains and trenches. Some key evidence for this comes from
+            the following sources:
+          </p>
+          <ul>
+            <li>Maps: The shapes of various landmasses appear to fit together</li>
+            <li>Fossil Record: Fossils of similar animals can be found across completely separate
+                continents</li>
+            <li>Mid-Ocean Ridges: The are parallel lines of rock of increasing age around the ridge
+                suggesting that the older rock moved away from the ridge</li>
+            <li>Patterns of Magnetism: Parallel lines of rock along ridges demonstrate have different
+                polarities from Earth's polarity reversals</li>
+            <li>Earthquakes: The speed of seismic waves vary in earthquakes depending on location
+                and depth</li>
+          </ul>
+        </div><div class="narrow">
+          <div class="crust">
+            <div class="upper-mantle">
+              <div class="lower-mantle">
+                <div class="outer-core">
+                  <div class="inner-core"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <img src="images/continentaldrift.gif" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-two" id="topic2">
+      <div class="content">
+        <h1>Navigation</h1>
+        <div class="half">
+          <p>
+            Ye olde sailors would find land by looking for certain signs in their environment:
+          </p>
+          <ul>
+            <li>Clouds in the distance - as land heats up during the day, clouds form</li>
+            <li>Seabirds returning home at dusk</li>
+            <li>The presence of different kinds of sea life</li>
+            <li>Changes in wave patterns potentially deflecting off land</li>
+            <li>Changes in ocean temperature</li>
+            <li>Changes in color of water</li>
+            <li>Directions of the stars for general navigation</li>
+          </ul>
+          <p>
+            Thankfully sailors have more precise means for determining their location now.
+            With the invention of an accurate clock, it became possible to exactly determine
+            one's location using latitude and longitude.
+          </p>
+        </div><div class="half">
+          <h2>Distance Calculator</h2>
+          <label for="source-longitude">Source Longitude:</label>
+          <input id="source-longitude" type="text"></input>
+          <input type="radio" name="slong-direction" value="E" checked>E</input>
+          <input type="radio" name="slong-direction" value="W">W</input>
+          <br>
+          <label for="destination-longitude">Destination Longitude:</label>
+          <input id="destination-longitude" type="text"></input>
+          <input type="radio" name="dlong-direction" value="E" checked>E</input>
+          <input type="radio" name="dlong-direction" value="W">W</input>
+          <br>
+          <label for="latitude">Latitude:</label>
+          <input id="latitude" type="text"></input>
+          <input type="radio" name="lat-direction" value="N" checked>N</input>
+          <input type="radio" name="lat-direction" value="S">S</input>
+          <br>
+          <div class="button" id="calculate-distance">
+            Calculate!
+          </div>
+          <div id="output-two"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-three" id="topic3">
+      <div class="content">
+        <h1>OCEAN CARBON CHEMISTRY</h1>
+        <div class="center justified">
+          <p>
+            The ocean dissolves large amounts of carbon in three different chemical compounds:
+            carbonic acid (H<sub>2</sub>CO<sub>3</sub>), bicarbonate (HCO<sub>3</sub><sup>-</sup>)
+            and carbonate (CO<sub>3</sub><sup>2-</sup>). A large amount of this is from biogenous
+            sediment allowing the ocean to absorb large amouts of atmospheric CO<sub>2</sub>. In
+            fact, the amount of CO<sub>2</sub> in the atmosphere is 30% lower thanks to the ocean's
+            biological carbon pump.
+          </p>
+        </div><div class="center centered">
+          <h2>CARBON CONCENTRATION CALULATOR</h2>
+          <p>
+            K<sub>H</sub>: 10<sup>-1.5</sup>,
+            K<sub>1</sub>: 10<sup>-5.9</sup>,
+            K<sub>2</sub>: 10<sup>-9.0</sup>
+          </p>
+          <label for="pco2">pCO<sub>2</sub> (ppm):</label>
+          <input id="pco2" type="text"></input>
+          <label for="ph">pH:</label>
+          <input id="ph" type="text"></input>
+          <div class="button" id="calculate-carbon">
+            Calculate!
+          </div>
+          <div id="output-three"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/distance.js"></script>
+    <script type="text/javascript" src="js/carbon.js"></script>
+  </body>
+</html>
