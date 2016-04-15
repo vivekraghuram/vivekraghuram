@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 40px auto;
+        max-width: 800px;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px
+      }
+
+      h1,
+      h2,
+      h3 {
+        text-align: center;
+        line-height: 1.2
+      }
+
+      .img-caption {
+        text-align: center;
+      }
+
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+
+      p {
+        text-align: justify;
+      }
+
+      .todo {
+        font-size: 24px;
+        color: red;
+        font-weight: bold;
+      }
+
+      .toobig {
+        width: 100%;
+        height auto;
+      }
+      /**********************************/
+      /* Taken from PURE CSS from Yahoo */
+      /**********************************/
+
+      .pure-table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        border: 1px solid #cbcbcb;
+      }
+
+      .pure-table td,
+      .pure-table th {
+        border-left: 1px solid #cbcbcb;
+        border-width: 0 0 0 1px;
+        font-size: inherit;
+        margin: 0;
+        overflow: visible;
+        padding: 0.5em 1em;
+      }
+
+      .pure-table td:first-child,
+      .pure-table th:first-child {
+        border-left-width: 0;
+      }
+
+      .pure-table thead {
+        background-color: #e0e0e0;
+        color: #000;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      .pure-table td {
+        background-color: transparent;
+      }
+
+      .pure-table-bordered td {
+        border-bottom: 1px solid #cbcbcb;
+      }
+
+      .pure-table-bordered tbody > tr:last-child > td {
+        border-bottom-width: 0;
+      }
+
+    </style>
+    <title>Vivek Raghuram | CS 184</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+  </head>
+
+  <body>
+    <br />
+    <h1 align="middle">Final Project Proposal: Mesh Simplification and Remeshing</h1>
+    <h2 align="middle">Vivek Raghuram</h2>
+    <p>
+      I would like to extend assignment 2 by adding more features to the original program. These
+      features will be mesh simplification as well as mesh regularization through remeshing. I will
+      be completing the project solo.
+    </p>
+
+    <h2 align="middle">Background</h2>
+    <p>
+      Mesh manipulation is extremely important because it is one of the main ways that 3D objects are
+      represented in a computer. Mesh simplification is a useful technique for compressing the size of
+      a given mesh. This is useful for keeping meshes a reasonable size for computers to handle. Regularization
+      through remeshing creates a mesh with roughly consistent voronoi areas for the vertices. The resulting
+      structure is useful for performing certain computations that would be difficult to solve otherwise. In
+      paper 2, remeshing is used when manipulating regions of a mesh in order to perform the
+      manipulation on the simpler remeshing and the mapping the details onto the result. My primary sources
+      will be the suggested papers:
+    </p>
+    <ol>
+      <li><a href="http://www.cs.cmu.edu/~./garland/Papers/quadrics.pdf">Surface Simplification Using Quadric Error Metrics</a></li>
+      <li><a href="http://graphics.uni-bielefeld.de/publications/sgp04.pdf">A Remeshing Approach to Multiresolution Modeling</a></li>
+    </ol>
+
+    <h2 align="middle">Resources</h2>
+    <p>
+      I will be doing development on a 2013 Macbook Pro with a 2.4 GHz Intel i5 CPU and 8GB of RAM. I may also
+      run the code on the 349 Soda machines although I do not anticipate it to be too computationally intensive.
+      I will be starting from the existing code for Assignment 2 and will be adding features onto it.
+    </p>
+
+    <h2 align="middle">Goals</h2>
+    <p>
+      My main goals are to achieve what each paper was able to do for simplification and remeshing. Once I get
+      these working, I will work on efficiency which will also hopefully lead to a slick demo.
+    </p>
+    <p>
+      Primary Goals:
+    </p>
+    <ul>
+      <li>Achieve the same simplification effects as paper 1 on bunny.dae</li>
+      <li>Achieve the same remeshing effects as paper 2 on maxplanck.dae</li>
+      <li>Speed up mesh simplification to be able to completely simplify most models in under a minute</li>
+    </ul>
+    <img src="images/bunny_simplification.png" width="350px" style="display:inline-block;vertical-align:top;"/>
+    <img src="images/planck_remeshing.png" width="350px" style="display:inline-block;vertical-align:top;"/>
+    <p>
+      Stretch Goals:
+    </p>
+    <ul>
+      <li>Be able to display simplification occurring in real time</li>
+      <li>Be able to display remeshing happening in real time</li>
+    </ul>
+    <p>
+      I will evaluate success by first checking the rendered models visually. If the respective algorithms work
+      the results should be clearly visible and look similar to the results achieved by the paper. I can test
+      their robustness by seeing if their behavior is predictable on other models not seen in the papers. Once I
+      get the base version working, I will keep track of each optimization I make and how it impacts overall performance.
+      I may conduct further research on other possible optimizations outside of those presented in the papers
+      in order to achieve desired speeds.
+    </p>
+    <p>
+      I intend to work on getting mesh simplification working before remeshing. Therefore in the event that I run
+      into complications, I should be able to get one thing to a working state in the allotted time period. However,
+      getting a working version of both algorithms does not seem like it will not be achievable.
+    </p>
+    <p>
+      My stretch goals are to get both algorithms to be able to run smoothly in real time so that you can
+       observe their behavior. This would probably only work well on simpler meshes.
+    </p>
+
+    <h2 align="middle">Goals</h2>
+    <ul>
+      <li>Weeks 0-0.5: Modify and build data structures necessary for mesh simplification</li>
+      <li>Weeks 0.5-1.0: Implement mesh simplification algorithm</li>
+      <li>Weeks 1.0-1.5: Modify and build data structures necessary for remeshing</li>
+      <li>Weeks 1.5-2.0: Implement remeshing algorithm</li>
+      <li>Weeks 2.0-2.5: Speed up algorithms and get them ready to demo</li>
+    </ul>
+  </body>
+
+</html>
