@@ -1,0 +1,425 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <style>
+            @font-face {
+                font-family: lmroman;
+                src: url(fonts/lmroman12-regular.otf);
+            }
+
+            @font-face {
+                font-family: lmroman;
+                src: url(fonts/lmroman12-bold.otf);
+                font-weight: bold;
+            }
+
+            @font-face {
+                font-family: lmroman;
+                src: url(fonts/lmroman12-italic.otf);
+                font-style: italic;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 40px auto;
+                max-width: 800px;
+                line-height: 1.6;
+                font-size: 18px;
+                font-family: lmroman;
+                color: #444;
+                padding: 0 10px
+            }
+
+            h1,
+            h2,
+            h3 {
+                text-align: center;
+                line-height: 1.2
+            }
+
+            h4,
+            h5 {
+                text-align: center;
+            }
+
+            .img-caption {
+                text-align: center;
+            }
+
+            .two-up {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .two-up .img-caption {
+                width: 50%;
+                padding-bottom: 20px;
+            }
+
+            img {
+                width: 100%;
+                cursor: pointer;
+            }
+
+            p {
+                text-align: justify;
+            }
+
+            .todo {
+                background-color: red;
+                color: white;
+            }
+
+            .formula {
+                text-align: center;
+            }
+
+        </style>
+        <script type="text/javascript" src="LaTeXMathML.js"></script>
+        <title>Vivek Raghuram | CS 184</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    </head>
+
+    <body>
+        <h1 align="middle">Final Project: Downsampling and Remeshing</h1>
+        <h2 align="middle">Vivek Raghuram</h2>
+
+        <h2 align="middle">Abstract</h2>
+        <p>
+            This report covers the addition of 3 major features and 1 minor feature to an existing halfedge mesh editor. The first
+            major addition is downsampling using quadric error minimization as a heuristic. Downsampling is the process
+            of simplifying a mesh while trying to avoid losing detail in the mesh. Quadric error measures the deviation
+            of a vertex from its incident faces and helps guide the downsampling process. The second and third major
+            additions relate to remeshing which is the process of regularizing the mesh to make other operations easier.
+            The techniques implemented were uniform remeshing which regularizes all triangles but also destroys features
+            and curvature adaptive remeshing to help preserve more of the shape of the underlying mesh. Finally, there
+            is a small demonstration of simple feature detection based on the angle of the incident planes to avoid
+            modifying important edges. None of the features as implemented support boundary edges but can be made to by adding
+            cases mentioned in the references.
+        </p>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/base-peter-sideview.png" />
+                <small>peter.dae with no modification</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/downsample-peter-sideview.png" />
+                <small>peter.dae with a 75% downsample</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/resample-peter-sideview.png" />
+                <small>peter.dae with uniform remeshing</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/aresample-peter-sideview.png" />
+                <small>peter.dae with curvature adaptive remeshing</small>
+            </div>
+        </div>
+
+        <h2 align="middle">Technical Approach</h2>
+        <h3>Downsampling</h3>
+        <p>
+            Downsampling basically compresses the mesh by removing less important portions of the mesh. Although there are many
+            ways to measure importance, the way used in this case is quadric error which yields an efficient and effective
+            solution.
+        </p>
+        <h5>CollapseEdge and isValidCollapse</h5>
+        <p>
+            The first step to being able to downsample is the ability to collapse an edge. When an edge is collapsed, it is removed
+            from the mesh along with the incident faces and a few more components. The image below shows the exact behavior
+            of collapsing an edge. Because this process inherently simplifies the mesh, it is perfect for downsampling.
+        </p>
+        <p>
+            However, one thing to consider before collapsing an edge, is whether it is a valid collapse. That is, does it preserve
+            the manifold properties of the mesh? The conditions for an edge $(a, b)$, presented in <a href="#references">2</a>
+            are as follows:
+        </p>
+        <ul>
+            <li>If an $a$ and $b$ share a neigbor, $c$, then $abc$ must be triangle in the mesh</li>
+            <li>If $a$ and $b$ are boundary vertices, then $ab$ must be a boundary edge</li>
+            <li>The mesh has at least 3 or 4 vertices left depending on whether $a$ and $b$ are boundary vertices</li>
+        </ul>
+        <p>
+            The function isValidCollapse handles checking for the above conditions. If those conditions pass, then collapseEdge
+            is used to collapse the edge.
+        </p>
+        <img src="images/edgeCollapse.png" alt="" />
+        <h5>Quadric Error Computation</h5>
+        <p>
+            The quadric error is used to measure the deviation of point from a surface. While the full details of the computation
+            are presented in <a href="#references">1</a> and <a href="#references">7</a>, the general gist
+            is that through the magic of linear algebra each vertex is assigned a quadric matrix. Combining the matrices
+            of the endpoints of an edge can then be done to determine the optimal point to collapse to on the edge,
+            and how much error that collapse would result in. This error is then used to prioritize edge collapses using
+            a priority queue. When an edge is collapsed, the resulting vertex is positioned at the optimal point.
+        </p>
+        <h5>Algorithm</h5>
+        <p>
+            Once the system has the ability to collapse an edge and compute the quadric error, the algorithm is fairly
+            straightforward. The algorithm as presented in <a href="#references">1</a> involves collapsing edges and
+            also pairs of points that happen to be close together. The version implemented in this project does not
+            consider points that are close together, mainly because it would require having an idea of a pseudo-edge
+            and maintaining those within the priority queue as well. Additionally, this leads to more issues with preserving
+            manifold properties. Otherwise, the algorithm works as presented.
+        </p>
+        <ul>
+            <li>Compute the quadrics at each face</li>
+            <li>Compute the quadrics at each vertex by summing over the incident faces</li>
+            <li>Compute the error of collapsing each edge by determining the optimal point to collapse the edge to</li>
+            <li>
+                Until the mesh is sufficiently compressed, collapse the cheapest edge and compute quadrics of new vertices and update
+                the cost of neighboring edges
+            </li>
+        </ul>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/base-cow.png" />
+                <small>cow.dae with no modification</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/downsample-cow.png" />
+                <small>cow.dae with a 75% downsample</small>
+            </div>
+        </div>
+
+        <h3>Uniform Remeshing</h3>
+        <p>
+            Uniform remeshing attempts to clean up a mesh and make it better for other processes by pushing triangles to be roughly
+            equilateral with uniform edge lengths and attempting to keep vertex degrees as close to 6 as possible. As
+            the name suggests, this approach to remeshing does not consider the shapes or details of the underlying
+            mesh when remeshing. This can make it very lossy.
+        </p>
+        <h5>isValidFlip</h5>
+        <p>
+            Although edge flipping functionality was already developed in the mesh editor, it did not check for the validity of
+            the flip. The function isValidFlip checks to make sure that the nicer properties of the mesh (being manifold)
+            are presereved by the edge flip. It follows a few simple rules presented in <a href="#references">3</a>.
+            These rules for an edge $(a, b)$ are:
+        </p>
+        <ul>
+            <li>Flip only if $a$ and $b$ both have a valence greater than 3</li>
+            <li>If the flip will result in edge $(c, d)$, then edge $(c, d)$ must not already exist</li>
+        </ul>
+        <h5>Algorithm</h5>
+        <p>
+            The algorithm first presented in <a href="#references">5</a> is fairly straightforward. First the mean edge
+            length is calculated in order to be the threshold against which edge lengths are measured. After that edges
+            are collapsed and split depending on length relative to the mean and edgse are flipped to bring valences
+            closer 6. More specifically the algorithm works as follows:
+        </p>
+        <ul>
+            <li>Split every edge that is longer than 4/3rds the mean</li>
+            <li>Collapse every edge that is shorter than 4/5ths the mean</li>
+            <li>Flip any edge that will result in the valence of neighboring vertices to move closer to 6</li>
+            <li>Move each vertex closer to the centroid of its neighboring vertices along the surface tangent</li>
+        </ul>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/base-cow.png" />
+                <small>cow.dae with no modification</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/resample-cow.png" />
+                <small>cow.dae with uniform remeshing</small>
+            </div>
+        </div>
+
+        <h3>Curvature Adaptive Remeshing</h3>
+        <p>
+            Curvature adaptive remeshing works almost identically to uniform remeshing. However, instead of using the mean edge
+            length to determine splits and collapses, a new threshold is used that makes collapses less likely when
+            there is a greater underlying curvature. Additionally, when vertices are repositioned, a new target locaiton
+            is used. These help to preserve the features of the mesh unlike uniform remeshing.
+        </p>
+        <h5>Sizing Field</h5>
+        <p>
+            The sizing field is a term calculated to give a length threshold more representative of the area on the mesh. In this
+            case it is calculated based on both the curvature at a point and a user defined tolerance to determine
+            how far the remeshing can deviate from the existing curve. Although meshes do not inherently have any curvature,
+            they can be treated as a linear approximation of a curved surface.
+        </p>
+        <p>
+            While there are a variety of curvature approximation techniques, the one implemented here is the mean curvature $H$ as
+            described in <a href="#references">4</a>. The mean curvature is calculated at a vertex.
+        </p>
+        <p class="formula">
+            $H = \frac{1}{4A} \sum_{i=0}^{n} ||e_i|| |{\beta}_i|$
+        </p>
+        <p>
+            The edges $e_i$ are the incident edges to the vertex. ${\beta}$ refers to the dihedral angle between the adjacent planes
+            to edge $e_i$. $A$ is the barycentric area at the vertex which is simply $\frac{1}{3}$ of the sum of the
+            areas of the incident faces. The curvature for an edge is the minimum of the curvatures for its endpoints.
+            Once $H$ is calculated the sizing field $L$ can be found:
+        </p>
+        <p class="formula">
+            $L = \sqrt{\frac{6\epsilon}{H} - 3{\epsilon}^2}$
+        </p>
+        <p>
+            $\epsilon$ is the tolerance for the allowed deviation of the mesh from the approximate surface. $L$ is used to replace
+            the mean edge length in the algorithm from uniform remeshing.
+        </p>
+        <h5>Weighted Centroid Computation</h5>
+        <p>
+            Whereas in the uniform version, the vertices were moved towards the centroid of their neighbors, now the vertices need
+            to move in accordance with the curvature of the mesh. As presented in <a href="#references">6</a>,
+            the target $c$ of the vertex shift is as follows:
+        </p>
+        <p class="formula">
+            $c = \frac{\sum |t_j| L(b_j) b_j}{\sum |t_j| L(b_j)}$
+        </p>
+        <p>
+            The sums are taken over the incident triangles. $|t_j|$ is the area of triangle $j$. $b_j$ is the barycenter of the
+            triangle $j$ and $L(b_j)$ is the sizing field at the barycenter. Everything else about the vertex movement
+            computation remains the same.
+        </p>
+        <h5>Parameter Tuning</h5>
+        <p>
+            Because the sizing field has a tolerance parameter, it requires tuning based on the scale of the mesh and the desired
+            level of detail preserved. This can vary quite significantly, especially if the meshes are on different
+            scales. For example, the mesh peter.dae works well with $\epsilon = 0.35$ whereas cow.dae works well with
+            $\epsilon = 0.007$.
+        </p>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/base-cow.png" />
+                <small>cow.dae with no modification</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/aresample-cow.png" />
+                <small>cow.dae with curvature adaptive remeshing - the number of triangles reduced from 5856 to 3890</small>
+            </div>
+        </div>
+
+        <h3>Feature Detection</h3>
+        <p>
+            Feature detection can be used to further avoid destruction of features. Edges can be defined as regular edges or as
+            feature edges depending on the angle between the incident faces. A threshold parameter is used to determine
+            whether the angle is great enough to classify the edge as a feature. This functionality can then be used to
+            prevent modifying edges that are crucial to the overall mesh shape as demonstrated in the images below.
+            It is also possible to use this information to improve the adaptive remeshing by improving modification
+            (as opposed to preventing modification) of feature edges and movement of vertices (<a href="#references">4</a>)
+            but was not implemented here.
+        </p>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/aresample-cube.png" />
+                <small>cube/input.dae with curvature adaptive remeshing</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/edgedetect-cube.png" />
+                <small>cube/input.dae with curvature adaptive remeshing except prohibiting modification of feature edges</small>
+            </div>
+        </div>
+
+        <h2>Results</h2>
+        <p>
+            Downsampling works very effectively as can be seen from the images. Despite a 75% reducation in the number of triangles
+            in the mesh, most of the features remain intact.
+        </p>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/base-beast.png" />
+                <small>beast.dae with no modification</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/downsample-beast.png" />
+                <small>beast.dae made 75% smaller with downsampling</small>
+            </div>
+        </div>
+        <p>
+            Uniform remeshing, however, has a tendency to obliterate many of the features of the mesh. That said, it is extremely
+            effective at getting meshes that have the correct valences and roughly equilateral triangles.
+        </p>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/base-beast.png" />
+                <small>beast.dae with no modification</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/resample-beast.png" />
+                <small>beast.dae with uniform remeshing</small>
+            </div>
+        </div>
+        <p>
+            Curvature adaptive remeshing manages to both preserve features and make the mesh much "nicer". Interestingly enough
+            it can also achieve major reductions in mesh size while preserving these features. That said, downsampling still
+            is better at feature preservation if compression is the goal.
+        </p>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/base-beast.png" />
+                <small>beast.dae with no modification</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/aresample-beast.png" />
+                <small>beast.dae with curvature adaptive remeshing - the number of triangles reduced from 64618 to 53466</small>
+            </div>
+        </div>
+        <div class="two-up">
+            <div class="img-caption">
+                <img src="images/resample-beast-mesh.png" />
+                <small>beast.dae mesh with uniform remeshing</small>
+            </div>
+            <div class="img-caption">
+                <img src="images/aresample-beast-mesh.png" />
+                <small>beast.dae mesh with curvature adaptive remeshing - the number of triangles reduced from 64618 to 53466</small>
+            </div>
+        </div>
+
+        <h2 id="references">References</h2>
+        <ol>
+            <li>
+                <a href="http://www.cs.cmu.edu/~./garland/Papers/quadrics.pdf">
+                Surface Simplification Using Quadric Error Metrics
+              </a>
+            </li>
+            <li>
+                <a href="http://research.microsoft.com/en-us/um/people/hoppe/meshopt.pdf">
+                  Mesh Optimization
+                </a>
+            </li>
+            <li>
+                <a href="https://books.google.com/books?id=0lb4_pLIyP8C&pg=PA203&lpg=PA203&dq=preserving+manifold+edge+flip&source=bl&ots=TEDVKh8yaA&sig=myY2CfNRPG04oBU96uITD5gdzf0&hl=en&sa=X&ved=0ahUKEwj6tpGGt6_MAhUS1WMKHWtmCco4ChDoAQg9MAQ#v=onepage&q=preserving%20manifold%20edge%20flip&f=false">
+                  Guide to Computational Geometry Processing: Foundations, Algorithms, and Methods
+                </a>
+            </li>
+            <li>
+                <a href="https://nccastaff.bournemouth.ac.uk/jmacey/MastersProjects/MSc15/08Tanja/report.pdf">
+                  Curvature-Adaptive Remeshing with Feature Preservation of Manifold Triangle Meshes with Boundary
+                </a>
+            </li>
+            <li>
+                <a href="http://graphics.uni-bielefeld.de/publications/sgp04.pdf">
+                  A Remeshing Approach to Multiresolution Modeling
+                </a>
+            </li>
+            <li>
+                <a href="http://graphics.uni-bielefeld.de/publications/eg13-remeshing.pdf">
+                  Adaptive Remeshing for Real-Time Mesh Deformation
+                </a>
+            </li>
+            <li>
+                <a href="http://462cmu.github.io/asst2_meshedit/">
+                CS462 at CMU
+              </a>
+            </li>
+        </ol>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            // should have actually written this in the html but w/e
+            $("img").on("click", function(e) {
+                window.open($(this).attr("src"), '_blank');
+            })
+
+        </script>
+    </body>
+
+</html>
