@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  return;
   var portfolioSlide = $('#portfolio-slide');
   var portfolioContent = $(portfolioSlide).children();
   var stack = new Array();
